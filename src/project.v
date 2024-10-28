@@ -1,5 +1,3 @@
-/*
- * Copyright (c) 2024 Your Name
 `default_nettype none
 
 module tt_um_example #(
