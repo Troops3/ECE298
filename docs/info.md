@@ -1,20 +1,19 @@
-<!---
-
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
-
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
-
 ## How it works
 
-Explain how your project works
+This project implements a 1-byte x 16 register memory module (it consists of 16 memory locations that store 1 byte each). The memory allows for both read and write operations, controlled by input signals.
+
+Addressing: The memory is accessed by a 4-bit address (since 16 memory locations require 2^4 addresses). The address specifies which register (out of 16) is being accessed for reading or writing.
+Write operation: A byte of data can be written into the memory when the write enable (lr_n) signal is active (low) and the clock edge occurs.
+Read operation: Data from a specific address can be read when the chip enable (ce_n) signal is active (low). The data is output on the uio_out bus, and it is updated on the clock edge.
+Control Signals:
+  ce_n (Chip Enable): Active low, it enables the chip for reading data.
+  lr_n (Load/Read Enable): Active low, it enables writing to memory.
+Output: Data is presented on the uio_out line when the chip is enabled for reading, and high-impedance (Z) otherwise.
 
 ## How to test
 
-Explain how to use your project
+Explain how to use your project (add)
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+List external hardware used in your project (e.g. PMOD, LED display, etc), if any (add)
