@@ -12,7 +12,8 @@ Output: Data is presented on the uio_out line when the chip is enabled for readi
 
 ## How to test
 
-Explain how to use your project (add)
+The test provided under tests is a simple test case to check the basic read/write functionality of the memory. 
+There are many edge cases that will be tested in the future, such as inconsisitent control signals, and access/store time. 
 
 ## External hardware
 
