@@ -1,6 +1,6 @@
 `default_nettype none
 
-module tt_um_example #(
+module tt_um_dff_mem #(
     parameter RAM_BYTES = 16  
 ) (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
@@ -39,4 +39,4 @@ module tt_um_example #(
     end
   end
 
-endmodule  // tt_um_example
+endmodule  // tt_um_dff_mem
