@@ -1,4 +1,4 @@
-default_nettype none
+`default_nettype none
 
 module tt_um_dff_mem #(
     parameter RAM_BYTES = 16  
