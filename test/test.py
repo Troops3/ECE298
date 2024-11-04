@@ -38,7 +38,7 @@ async def test_write_read_all_addresses(dut):
     dut._log.info("Reading back each address and verifying data")
     for address in range(16):
         dut.ui_in.value = CE_N | address  # Set lr_n high (read), ce_n low (active), specify address
-        await ClockCycles(dut.clk, 2)
+        await ClockCycles(dut.clk, 3)
         expected_value = address * 0x11
         assert int(dut.uio_out.value) == expected_value, f"Readback error at address {address}: expected {expected_value}, got {int(dut.uio_out.value)}"
 
