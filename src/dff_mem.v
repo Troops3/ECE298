@@ -1,4 +1,4 @@
-`default_nettype none
+default_nettype none
 
 module tt_um_dff_mem #(
     parameter RAM_BYTES = 16  
@@ -25,7 +25,7 @@ module tt_um_dff_mem #(
   always @(posedge clk) begin
     if (!rst_n) begin
       uo_out <= 8'b0;
-      uio_out <= 8'bZ;
+      uio_out <= 8'b0;
       uio_oe <= 8'h00;
       for (int i = 0; i < RAM_BYTES; i++) begin
         RAM[i] <= 8'b0;  // Reset RAM contents
@@ -38,7 +38,7 @@ module tt_um_dff_mem #(
         uio_out <= RAM[addr];
         uio_oe <= 8'hFF;
       end else begin
-        uio_out <= 8'bZ;
+        uio_out <= 8'b0;  // Output zeros instead of Z
         uio_oe <= 8'h00;
       end
       uo_out <= 8'b0;  
