@@ -33,4 +33,4 @@ The CocoTB testbenches located in the _test.py_ file, test various scenarios for
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any (add)
+N/A
