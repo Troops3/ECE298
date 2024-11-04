@@ -21,21 +21,28 @@ module tt_um_dff_mem #(
 
   reg [7:0] RAM[RAM_BYTES - 1:0];
 
-  // Assign outputs based on ce_n and lr_n control signals
-  assign uio_out = (!ce_n) ? RAM[addr] : 8'bZ;  // Output data when ce_n is low
-  assign uio_oe  = (!ce_n) ? 8'hFF : 8'h00;     // Enable output when ce_n is low
-
-  always @(posedge clk) begin
+  always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
+      // Reset block: clear output and RAM
       uo_out <= 8'b0;
-      for (int i = 0; i < RAM_BYTES; i++) begin
-        RAM[i] <= 8'b0;  // Reset RAM contents
+      uio_out <= 8'b0;
+      uio_oe <= 8'b0;
+      for (int i = 0; i < RAM_BYTES; i = i + 1) begin
+        RAM[i] <= 8'b0;
       end
     end else begin
-      if (!lr_n) begin  // Load data into RAM when lr_n is low
+      if (!ce_n) begin
+        // Synchronous read: Output data in the same clock cycle as the read operation
+        uio_out <= RAM[addr];   // Data appears immediately on the output
+        uio_oe <= 8'hFF;        // Set output enable
+      end else begin
+        uio_oe <= 8'h00;        // Disable output
+      end
+      
+      if (!lr_n) begin
+        // Synchronous write: Store data in RAM on the same clock edge
         RAM[addr] <= uio_in;
       end
-      uo_out <= 8'b0;  // Optional: can be used for debugging or status
     end
   end
 
