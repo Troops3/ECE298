@@ -29,14 +29,15 @@ async def test_write_read_all_addresses(dut):
     # Write a unique byte to each address
     dut._log.info("Writing a unique byte to each address in RAM")
     for address in range(16):
-        dut.ui_in.value = CE_N | address   # Set lr_n=0 (write), ce_n=1 (inactive), specify address
+        dut.ui_in.value = address   # Set lr_n=0 (write), ce_n=1 (inactive), specify address
+        dut.ui_in.value &= ~LR_N    # Set lr_n low to enable write
         dut.uio_in.value = address * 0x11  # Unique byte for each address (0x00, 0x11, 0x22, ...)
         await ClockCycles(dut.clk, 1)
 
     # Read back each byte and verify correctness
     dut._log.info("Reading back each address and verifying data")
     for address in range(16):
-        dut.ui_in.value = LR_N | address  # Set lr_n=1 (read), ce_n=0 (active), specify address
+        dut.ui_in.value = CE_N | address  # Set lr_n high (read), ce_n low (active), specify address
         await ClockCycles(dut.clk, 2)
         expected_value = address * 0x11
         assert int(dut.uio_out.value) == expected_value, f"Readback error at address {address}: expected {expected_value}, got {int(dut.uio_out.value)}"
