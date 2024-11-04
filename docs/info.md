@@ -29,7 +29,7 @@ Data can be read from a specific register in RAM determined by the input address
 
 To test, set the address and corresponding inputs to desired values. Clear ```lr_n``` for a write operation and ```ce_n``` for a read operation. Then pulse the clock to run signals.
 
-The CocoTB testbenches located in the _test.py_ file, test various scenarios for the module. First, it tests a write operation to each address in the module followed by a read operation, to ensure correct behaviour. The script then iterates over each address setting ```ui_in```, ```lr_n``` and clearing ```ce_n``` for Read Mode while enabling RAM output. The recevied value from the read, located in ```uio_out``` is compared to the expected byte from that address. If there are any mismatches, an assertion error is raised, spcifying the faulty address and value.  
+The CocoTB testbenches located in the _test.py_ file, test various scenarios for the module. First, it tests a write operation to each address in the module followed by a read operation at each address, to ensure correct behaviour. The script then sets ```ui_in```, ```lr_n``` high and clears ```ce_n``` to setup for a Read with RAM output enabled. It then iterates over and reads from each address, comparing the recevied value (```uio_out```), to the expected byte from that address. If there are any mismatches, an assertion error is raised, specifying the faulty address and value.  
 
 ## External hardware
 
