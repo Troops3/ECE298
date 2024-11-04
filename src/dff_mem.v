@@ -24,7 +24,12 @@ module tt_um_dff_mem #(
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       // Reset block: clear output and RAM
+      // Reset block: clear output and RAM
       uo_out <= 8'b0;
+      uio_out <= 8'b0;
+      uio_oe <= 8'b0;
+      for (int i = 0; i < RAM_BYTES; i = i + 1) begin
+        RAM[i] <= 8'b0;
       uio_out <= 8'b0;
       uio_oe <= 8'b0;
       for (int i = 0; i < RAM_BYTES; i = i + 1) begin
