@@ -33,4 +33,4 @@ The CocoTB testbenches located in the _test.py_ file, test various scenarios for
 
 ## External hardware
 
-N/A
+This RAM module is intended to be integrated into an 8-bit processor. However, it is being submitted to TT as an indiviudal tile for testing. An external MAR would thus be required to program RAM and subseqently read memory. The MAR would act as a programmer according to the avove described specifications.
