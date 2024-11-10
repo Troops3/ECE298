@@ -31,8 +31,8 @@ module tt_um_dff_mem (
   //positive edge enabled
   always @(posedge clk) begin
     if (!rst_n) begin
-      uo_out <= 8'b0;
-      for (int i = 0; i < RAM_BYTES; i++) begin
+        integer i;
+      for (i = 0; i < RAM_BYTES; i++) begin
         RAM[i] <= 8'b0;  // Reset RAM contents
       end
     end else begin
