@@ -23,13 +23,13 @@ A byte of data is written to specific register in RAM, where the location is det
 ***Read operation:*** 
 Data can be read from a specific register in RAM determined by the input address. Requires chip enable ```ce_n``` signal as active (low). The data is output on the uo_out ports, and it is updated asynchronously (independant of the clock edge). 
 
-***Output:*** Data is presented on the uio_out line when the chip is enabled for reading, and high-impedance (Z) otherwise.
+***Output:*** Data is presented on the uo_out line when the chip is enabled for reading, and high-impedance (Z) otherwise.
 
 ## How to test
 
 To test, set the address and corresponding inputs to desired values. Clear ```lr_n``` for a write operation and ```ce_n``` for a read operation. Then pulse the clock to run signals.
 
-The CocoTB testbenches located in the _test.py_ file, test various scenarios for the module. First, it tests a write operation to each address in the module followed by a read operation at each address, to ensure correct behaviour. The script then sets ```ui_in```, ```lr_n``` high and clears ```ce_n``` to setup for a Read with RAM output enabled. It then iterates over and reads from each address, comparing the recevied value (```uio_out```), to the expected byte from that address. If there are any mismatches, an assertion error is raised, specifying the faulty address and value.  
+The CocoTB testbenches located in the _test.py_ file, test various scenarios for the module. First, it tests a write operation to each address in the module followed by a read operation at each address, to ensure correct behaviour. The script then sets ```ui_in```, ```lr_n``` high and clears ```ce_n``` to setup for a Read with RAM output enabled. It then iterates over and reads from each address, comparing the recevied value (```uo_out```), to the expected byte from that address. If there are any mismatches, an assertion error is raised, specifying the faulty address and value.  
 
 
 ![image](https://raw.githubusercontent.com/Troops3/TinyRAM/main/.github/images/waveform1.png)
