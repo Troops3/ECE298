@@ -11,7 +11,7 @@ module tt_um_dff_mem #(
     input  wire       rst_n     // reset_n - low to reset
 );
     
-  localparam RAM_BYTES = 16  
+  localparam RAM_BYTES = 16;  
   localparam addr_bits = $clog2(RAM_BYTES);
 
   wire [addr_bits-1:0] addr = ui_in[addr_bits-1:0];
