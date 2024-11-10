@@ -16,6 +16,7 @@ module tt_um_dff_mem (
   localparam addr_bits = $clog2(RAM_BYTES);    //number of address bits is log2(ram size)
     
   assign uio_oe = 8'h00;     //assign all bidirectional pins as outputs
+  assign uio_out = 8'b0;
     
   wire [addr_bits-1:0] addr = ui_in[addr_bits-1:0];
   wire lr_n = ui_in[7];  // lr_n signal (active low)
