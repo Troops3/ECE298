@@ -35,10 +35,9 @@ module tt_um_dff_mem (
       for (i = 0; i < RAM_BYTES; i++) begin
         RAM[i] <= 8'b0;  // Reset RAM contents
       end
-    end else begin
-      if (!lr_n) begin  // Load data into RAM when lr_n is low
+    end else if (!lr_n) begin
+    // Load data into RAM when lr_n is low
         RAM[addr] <= uio_in;
-      end
     end
   end
 
