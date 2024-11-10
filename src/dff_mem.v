@@ -10,20 +10,24 @@ module tt_um_dff_mem (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-    
-  localparam RAM_BYTES = 16;  
-  localparam addr_bits = $clog2(RAM_BYTES);
 
+  //parameters to define the size of the memory (16 bytes)
+  localparam RAM_BYTES = 16;  
+  localparam addr_bits = $clog2(RAM_BYTES);    //number of address bits is log2(ram size)
+    
+  assign uio_oe = 8'h00;     //assign all bidirectional pins as outputs
+    
   wire [addr_bits-1:0] addr = ui_in[addr_bits-1:0];
   wire lr_n = ui_in[7];  // lr_n signal (active low)
   wire ce_n = ui_in[6];  // ce_n signal (active low)
 
+  //Declare register memory as a 2d array consisting of 16 words of 8 bits
   reg [7:0] RAM[RAM_BYTES - 1:0];
 
-  // Assign outputs based on ce_n and lr_n control signals
-  assign uio_out = (!ce_n) ? RAM[addr] : 8'bZ;  // Output data when ce_n is low
-  assign uio_oe  = (!ce_n) ? 8'hFF : 8'h00;     // Enable output when ce_n is low
-
+  // If ce_n is low (active), output ram at addr and output 
+  assign uo_out = (!ce_n) ? RAM[addr] : 8'bZ;  
+    
+  //positive edge enabled
   always @(posedge clk) begin
     if (!rst_n) begin
       uo_out <= 8'b0;
@@ -34,7 +38,6 @@ module tt_um_dff_mem (
       if (!lr_n) begin  // Load data into RAM when lr_n is low
         RAM[addr] <= uio_in;
       end
-      uo_out <= 8'b0;  // Optional: can be used for debugging or status
     end
   end
 
