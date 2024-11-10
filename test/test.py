@@ -28,6 +28,7 @@ async def test_write_read_all_addresses(dut):
 
     # Write a unique byte to each address
     dut._log.info("Writing a unique byte to each address in RAM")
+    for address in range(16):
         dut.ui_in.value = CE_N | address   # Set lr_n=0 (write), ce_n=1 (inactive), specify address
         dut.uio_in.value = address * 0x11  # Unique byte for each address (0x00, 0x11, 0x22, ...)
         await ClockCycles(dut.clk, 1)
